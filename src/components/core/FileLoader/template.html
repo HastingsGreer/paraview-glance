@@ -24,13 +24,13 @@
         <v-card-title class="title">
           Please review your files before loading:
         </v-card-title>
-        <v-expansion-panel expand>
-          <v-expansion-panel-content
+        <v-expansion-panels multiple>
+          <v-expansion-panel
             v-for="(file, i) in files"
             :key="i"
             :hide-default-footer="!isRawFile(file)"
           >
-            <div slot="header" class="body-2">
+            <v-expansion-panel-header class="body-2">
               <v-layout row align-center>
                 <v-flex shrink>{{ file.name }}</v-flex>
                 <v-flex shrink>
@@ -42,15 +42,15 @@
                   </v-icon>
                 </v-flex>
               </v-layout>
-            </div>
-            <template v-if="isRawFile(file)">
+            </v-expansion-panel-header>
+            <v-expansion-panel-content v-if="isRawFile(file)">
               <raw-file-reader
                 :file="file"
                 v-on:change="setFileRawInfo(i, arguments[0])"
               />
-            </template>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
       </v-card-text>
       <v-card-text
         v-else-if="stage === 'error'"
@@ -59,24 +59,26 @@
         <v-card-title class="title">
           The following files errored while loading:
         </v-card-title>
-        <v-expansion-panel expand>
-          <v-expansion-panel-content
+        <v-expansion-panels multiple>
+          <v-expansion-panel
             v-for="(file, i) in files"
             :key="i"
             :hide-default-footer="!file.error"
           >
-            <div slot="header" class="body-2">
+            <v-expansion-panel-header class="body-2">
               {{ file.name }}
               <v-icon v-show="!!file.error" color="red">error</v-icon>
               <v-icon v-show="!file.error" color="green">check_circle</v-icon>
-            </div>
-            <v-card v-if="file.error">
-              <v-card-text>
-                Error: {{ file.error.message || 'Unknown or bad file' }}
-              </v-card-text>
-            </v-card>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-card v-if="file.error">
+                <v-card-text>
+                  Error: {{ file.error.message || 'Unknown or bad file' }}
+                </v-card-text>
+              </v-card>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
       </v-card-text>
       <v-card-actions v-if="stage === 'preload'" key="if-actions">
         <v-spacer />
