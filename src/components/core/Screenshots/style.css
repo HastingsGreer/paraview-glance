@@ -28,7 +28,7 @@
 }
 
 .listButton {
-  /* match v-list-tile-title height */
+  /* match v-list-item-title height */
   height: 24px;
   width: 24px;
   /* override vuetify */

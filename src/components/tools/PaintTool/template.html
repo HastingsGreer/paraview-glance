@@ -120,14 +120,14 @@
               v-for="(labelData, i) in colormapArray"
             >
               <v-divider :key="`divider_${i}`" />
-              <v-list-tile :key="labelData.label">
-                <v-list-tile-action>
+              <v-list-item :key="labelData.label">
+                <v-list-item-action>
                   <v-radio
                     :class="$style.activeRadio"
                     :value="labelData.label"
                   />
-                </v-list-tile-action>
-                <v-list-tile-content :class="$style.listRow">
+                </v-list-item-action>
+                <v-list-item-content :class="$style.listRow">
                   <template v-if="labelData.label === 0">
                     <div :class="$style.colorBoxBackground">
                       <div
@@ -173,8 +173,8 @@
                     </pop-up>
                     <span class="pl-1">Label {{ labelData.label }}</span>
                   </template>
-                </v-list-tile-content>
-                <v-list-tile-avatar>
+                </v-list-item-content>
+                <v-list-item-avatar>
                   <div
                     :class="$style.deleteButton"
                     v-if="labelData.label !== 0"
@@ -182,8 +182,8 @@
                   >
                     <v-icon>delete</v-icon>
                   </div>
-                </v-list-tile-avatar>
-              </v-list-tile>
+                </v-list-item-avatar>
+              </v-list-item>
             </template>
             <v-divider />
           </v-radio-group>
