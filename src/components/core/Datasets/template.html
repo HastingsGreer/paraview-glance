@@ -1,8 +1,8 @@
-<v-expansion-panel
+<v-expansion-panels
   v-model="panelStates"
-  expand
+  multiple
 >
-  <v-expansion-panel-content
+  <v-expansion-panel
     v-for="(source, index) in datasets"
     v-show="source !== proxyToDelete"
     :key="source.getProxyId()"
@@ -13,10 +13,9 @@
       :visible="datasets.length > 1"
       :top="53"
     />
-    <div
-      slot="header"
-      v-bind:title="source.getName()"
+    <v-expansion-panel-header
       :class="$style.datasetHeader"
+      :title="source.getName()"
     >
       <v-btn
         :class="$style.headerMenuButton"
@@ -71,37 +70,38 @@
           </v-list>
         </v-menu>
       </div>
-    </div>
-    <v-card :class="$style.datasetControls">
-      <v-expansion-panel
-        v-model="subpanelStateMap.get(source)"
-        expand
-      >
-        <v-expansion-panel-content
-          v-for="(panel,i) in panels"
-          :key="i"
-          v-show="panel.visible(source)"
+    </v-expansion-panel-header>
+    <v-expansion-panel-content>
+      <v-card :class="$style.datasetControls">
+        <v-expansion-panels
+          v-model="subpanelStateMap.get(source)"
+          multiple
         >
-          <div
-            :class="$style.subpanelHeader"
-            slot="header"
+          <v-expansion-panel
+            v-for="(panel,i) in panels"
+            :key="i"
+            v-show="panel.visible(source)"
           >
-            <v-layout row align-center>
-              <v-flex shrink>
-                <v-icon>{{ panel.icon }}</v-icon>
-              </v-flex>
-              <v-flex shrink :class="$style.subpanelTitle">
-                <span class="body-2">{{ panel.name }}</span>
-              </v-flex>
-            </v-layout>
-          </div>
-          <component
-            v-if="panel.visible(source)"
-            :is="panel.component"
-            :source="source"
-          />
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-card>
-  </v-expansion-panel-content>
-</v-expansion-panel>
+            <v-expansion-panel-header :class="$style.subpanelHeader">
+              <v-layout row align-center>
+                <v-flex shrink>
+                  <v-icon>{{ panel.icon }}</v-icon>
+                </v-flex>
+                <v-flex shrink :class="$style.subpanelTitle">
+                  <span class="body-2">{{ panel.name }}</span>
+                </v-flex>
+              </v-layout>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <component
+                v-if="panel.visible(source)"
+                :is="panel.component"
+                :source="source"
+              />
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-card>
+    </v-expansion-panel-content>
+  </v-expansion-panel>
+</v-expansion-panels>
