@@ -32,17 +32,19 @@
         bottom
         :disabled="smallScreen"
       >
-        <a
-          slot="activator"
-          href="#"
-          v-on:click.prevent="toggleLanding"
-        >
-          <svg-icon
-            :icon="iconLogo"
-            height="52px"
-            style="margin-top: 6px"
-          />
-        </a>
+        <template v-slot:activator="{ on }">
+          <a
+            href="#"
+            v-on="on"
+            v-on:click.prevent="toggleLanding"
+          >
+            <svg-icon
+              :icon="iconLogo"
+              height="52px"
+              style="margin-top: 6px"
+            />
+          </a>
+        </template>
         <span v-if="landingVisible" key="if-landingVisible">Go to app</span>
         <span v-else key="if-landingVisible">Back to landing page</span>
       </v-tooltip>
