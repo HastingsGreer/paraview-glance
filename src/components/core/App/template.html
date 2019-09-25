@@ -53,7 +53,7 @@
         v-if="errors.length"
         key="if-has-errors"
         :class="$style.toolbarButton"
-        flat
+        text
         color="error"
         v-on:click="errorDialog = true"
       >
@@ -63,7 +63,7 @@
       </v-btn>
       <v-btn
         :class="$style.toolbarButton"
-        flat
+        text
         v-on:click="promptUserFiles"
       >
         <v-icon>folder</v-icon>
@@ -72,7 +72,7 @@
       <v-btn
         v-show="!landingVisible"
         :class="$style.toolbarButton"
-        flat
+        text
         v-on:click="saveState()"
       >
         <v-icon>cloud_download</v-icon>
@@ -81,7 +81,7 @@
       <v-btn
         v-show="!landingVisible"
         :class="$style.toolbarButton"
-        flat
+        text
         v-on:click="screenshotsDrawer = true"
       >
         <v-icon>collections</v-icon>
@@ -89,7 +89,7 @@
       </v-btn>
       <v-btn
         :class="$style.toolbarButton"
-        flat
+        text
         v-on:click="aboutDialog = true"
       >
         <!-- width of other icons in toolbar -->

@@ -26,7 +26,7 @@
                 :key="tool.name"
               >
                 <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" flat :class="$style.toolButton">
+                  <v-btn v-on="on" text :class="$style.toolButton">
                     <svg-icon :icon="tool.icon" :class="$style.toolIcon" />
                   </v-btn>
                 </template>
