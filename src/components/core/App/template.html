@@ -19,11 +19,8 @@
         <controls-drawer />
       </v-navigation-drawer>
 
-      <v-toolbar
-        clipped-left
-        app
-      >
-        <v-toolbar-side-icon
+      <v-app-bar app clipped-left>
+        <v-app-bar-nav-icon
           :disabled="landingVisible"
           @click.native.stop="controlsDrawer = !controlsDrawer"
         />
@@ -96,7 +93,7 @@
           <svg-icon icon="kitware-logo" width="24px" />
           <span v-show="!smallScreen">About</span>
         </v-btn>
-      </v-toolbar>
+      </v-app-bar>
 
       <v-content :class="$style.appContent">
         <landing
