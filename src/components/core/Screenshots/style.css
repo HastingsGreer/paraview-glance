@@ -22,7 +22,7 @@
   text-overflow: ellipsis;
 }
 
-.listAvatar {
+.listIcon {
   /* override vuetify */
   min-width: 0;
 }
