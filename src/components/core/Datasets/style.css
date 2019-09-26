@@ -11,6 +11,11 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.panelContent {
+  /* for positioning the color group absolutely */
+  position: relative;
+}
+
 /* vuetify override */
 .panelContent > :global(.v-expansion-panel-content__wrap) {
   padding: 0;

@@ -9,11 +9,6 @@
     :key="source.getProxyId()"
     :class="$style.datasetPanel"
   >
-    <color-group
-      :index="index"
-      :visible="datasets.length > 1"
-      :top="53"
-    />
     <v-expansion-panel-header
       class="pv-no-select pl-3 pr-3 pt-1 pb-1"
     >
@@ -75,6 +70,10 @@
       </div>
     </v-expansion-panel-header>
     <v-expansion-panel-content :class="$style.panelContent">
+      <color-group
+        :index="index"
+        :visible="datasets.length > 1"
+      />
       <v-expansion-panels
         v-model="subpanelStateMap.get(source)"
         multiple
