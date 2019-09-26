@@ -1,6 +1,7 @@
 <v-expansion-panels
   v-model="panelStates"
   multiple
+  accordion
 >
   <v-expansion-panel
     v-for="(source, index) in datasets"
@@ -14,13 +15,12 @@
       :top="53"
     />
     <v-expansion-panel-header
-      :class="$style.datasetHeader"
-      :title="source.getName()"
+      class="pv-no-select pl-3 pr-3 pt-1 pb-1"
     >
       <v-btn
-        :class="$style.headerMenuButton"
         icon
         small
+        class="flex-shrink-0"
         v-on:click.stop="toggleDatasetVisibility(source)"
       >
         <v-icon>
@@ -28,15 +28,16 @@
         </v-icon>
       </v-btn>
       <div
-        class="body-2"
-        :class="$style.source"
-      >{{ source.getName() }}</div>
+        class="subtitle-2 text-truncate pl-2 pr-2"
+        :title="source.getName()"
+      >
+        {{ source.getName() }}
+      </div>
       <v-tooltip
         v-if="proxyManager.getSources().length > 1"
-        top
-        :disabled="smallScreen"
+        bottom
       >
-        <span :class="$style.noSelect">Activate source</span>
+        <span class="pv-no-select">Activate source</span>
         <template v-slot:activator="{ on }">
           <v-btn
             :class="$style.headerMenuButton"
@@ -45,7 +46,9 @@
             v-on="on"
             v-on:click.stop="source.activate()"
           >
-            <v-icon>{{ proxyManager.getActiveSource() === source ? 'bookmark' : 'bookmark_border' }}</v-icon>
+            <v-icon>
+              {{ proxyManager.getActiveSource() === source ? 'bookmark' : 'bookmark_border' }}
+            </v-icon>
           </v-btn>
         </template>
       </v-tooltip>
@@ -71,37 +74,34 @@
         </v-menu>
       </div>
     </v-expansion-panel-header>
-    <v-expansion-panel-content>
-      <v-card :class="$style.datasetControls">
-        <v-expansion-panels
-          v-model="subpanelStateMap.get(source)"
-          multiple
+    <v-expansion-panel-content :class="$style.panelContent">
+      <v-expansion-panels
+        v-model="subpanelStateMap.get(source)"
+        multiple
+        accordion
+      >
+        <v-expansion-panel
+          v-for="(panel,i) in panels"
+          :key="i"
+          v-show="panel.visible(source)"
+          :class="$style.subpanel"
         >
-          <v-expansion-panel
-            v-for="(panel,i) in panels"
-            :key="i"
-            v-show="panel.visible(source)"
+          <v-expansion-panel-header
+            class="pv-no-select"
+            :class="$style.subpanelHeader"
           >
-            <v-expansion-panel-header :class="$style.subpanelHeader">
-              <v-layout row align-center>
-                <v-flex shrink>
-                  <v-icon>{{ panel.icon }}</v-icon>
-                </v-flex>
-                <v-flex shrink :class="$style.subpanelTitle">
-                  <span class="body-2">{{ panel.name }}</span>
-                </v-flex>
-              </v-layout>
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <component
-                v-if="panel.visible(source)"
-                :is="panel.component"
-                :source="source"
-              />
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels>
-      </v-card>
+            <v-icon left class="flex-grow-0">{{ panel.icon }}</v-icon>
+            <span class="body-2 font-weight-medium flex-grow-0">{{ panel.name }}</span>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content :class="$style.panelContent">
+            <component
+              v-if="panel.visible(source)"
+              :is="panel.component"
+              :source="source"
+            />
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-expansion-panel-content>
   </v-expansion-panel>
 </v-expansion-panels>
