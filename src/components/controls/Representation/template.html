@@ -2,7 +2,7 @@
   v-if="domains.representation || domains.opacity || domains.sampleDistance"
 >
   <v-card flat :class="$style.block" v-if="domains.representation">
-    <v-container fluid grid-list-lg class="pa-0">
+    <v-container fluid grid-list-xs class="pa-0">
       <v-layout row wrap align-center>
         <v-flex xs12>
           <v-select
@@ -22,7 +22,7 @@
       <span class="body-2">Mesh</span>
     </v-card-title>
     <v-card-text :class="$style.blockContent">
-      <v-container fluid grid-list-lg class="pa-0">
+      <v-container fluid grid-list-xs class="pa-0">
         <v-layout row wrap align-center>
           <v-flex xs3>
             <label :class="$style.smallLabel">Point Size</label>
@@ -83,7 +83,7 @@
       <span class="body-2">Shadow &amp; Edge</span>
     </v-card-title>
     <v-card-text :class="$style.blockContent">
-      <v-container fluid grid-list-lg class="pa-0">
+      <v-container fluid grid-list-xs class="pa-0">
         <v-layout row wrap align-center>
           <v-flex xs3>
             <label :class="$style.smallLabel">Sample Distance</label>
