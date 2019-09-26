@@ -1,33 +1,23 @@
 .block {
-  padding: 4px 10px 4px 16px;
-}
-
-/* override vuetify */
-.block :global(.container) {
-  padding: 0;
+  padding: 4px 0;
+  padding-right: 6px;
 }
 
 .blockTitle {
-  padding: 4px 0; /* override vuetify */
-  margin: 8px 4px;
-  /*border-bottom: 1px solid #bbb;*/
+  padding: 8px 4px;
 }
 
 .blockContent {
   padding: 4px;
 }
 
-/* Yeah really should override this with stylus */
-.blockContent :global(.v-input--slider) {
-  margin-top: 0;
-}
-
 .blockRow {
   margin: 4px 0;
 }
 
-.noTopPadding {
+.slimInput {
   padding-top: 0;
+  margin-top: 0;
 }
 
 .noSelect {
