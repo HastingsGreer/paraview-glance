@@ -61,8 +61,10 @@
 }
 
 .button {
+  width: 30px !important;
   min-width: 30px !important;
   height: 30px !important;
+  min-height: 30px !important;
 }
 
 .click {
