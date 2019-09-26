@@ -20,17 +20,12 @@
   margin-top: 0;
 }
 
-
 .canSelect {
   user-select: text;
 }
 
 .smallLabel {
   font-size: 12px;
-}
-
-.noMargin {
-  margin: 0;
 }
 
 .active {
