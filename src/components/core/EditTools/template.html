@@ -1,9 +1,9 @@
 <v-expansion-panels>
   <v-expansion-panel>
-    <v-expansion-panel-header class="body-2">
+    <v-expansion-panel-header class="subtitle-2">
       Measurements
     </v-expansion-panel-header>
-    <v-expansion-panel-content>
+    <v-expansion-panel-content :class="$style.panelContent">
       <measurement-tools
         :enabled="enabledTool === 'measurement'"
         @enable="setEnabledTool('measurement', $event)"
@@ -11,10 +11,10 @@
     </v-expansion-panel-content>
   </v-expansion-panel>
   <v-expansion-panel>
-    <v-expansion-panel-header class="body-2">
+    <v-expansion-panel-header class="subtitle-2">
       Painting
     </v-expansion-panel-header>
-    <v-expansion-panel-content>
+    <v-expansion-panel-content :class="$style.panelContent">
       <paint-tool
         :enabled="enabledTool === 'paint'"
         @enable="setEnabledTool('paint', $event)"
@@ -22,10 +22,10 @@
     </v-expansion-panel-content>
   </v-expansion-panel>
   <v-expansion-panel>
-    <v-expansion-panel-header class="body-2">
+    <v-expansion-panel-header class="subtitle-2">
       Cropping
     </v-expansion-panel-header>
-    <v-expansion-panel-content>
+    <v-expansion-panel-content :class="$style.panelContent">
       <crop-tool
         :enabled="enabledTool === 'crop'"
         @enable="setEnabledTool('crop', $event)"
