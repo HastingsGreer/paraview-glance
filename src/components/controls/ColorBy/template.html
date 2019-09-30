@@ -5,7 +5,7 @@
     <v-container fluid grid-list-xs class="pa-0">
       <v-layout row wrap align-center>
         <v-flex xs3 v-show="available === 'geometry'">
-          Color By
+          <span class="body-2">Color By:</span>
         </v-flex>
         <v-flex xs9 v-show="available === 'geometry'">
           <v-select
@@ -27,7 +27,11 @@
             v-on:input="setSolidColor"
           />
         </v-flex>
-        <v-flex xs12 v-show="colorBy.length">
+        <v-flex
+          xs12
+          v-show="colorBy.length"
+          class="pt-2"
+        >
           <v-menu
             :close-on-content-click="false"
             offset-y
@@ -99,7 +103,7 @@
               </v-icon>
             </v-flex>
             <v-flex xs10>
-              <span class="body-1">Interpolate scalar before mapping</span>
+              <span class="body-2">Interpolate scalar before mapping</span>
             </v-flex>
           </v-layout>
         </v-flex>
