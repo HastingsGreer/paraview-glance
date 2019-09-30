@@ -34,7 +34,7 @@
             v-model="presetMenu"
           >
             <template v-slot:activator="{ on }">
-              <div v-on="on">
+              <div v-on="on" :class="$style.clickable">
                 <span class="body-2">{{ presetName }}</span>
                 <img :src="lutImage" :class="$style.lutImage" />
               </div>

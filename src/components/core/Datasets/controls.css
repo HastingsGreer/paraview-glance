@@ -24,6 +24,10 @@
   user-select: text;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .smallLabel {
   font-size: 12px;
 }
