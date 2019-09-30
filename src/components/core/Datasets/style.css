@@ -7,10 +7,6 @@
   box-shadow: none;
 }
 
-.datasetPanel > .panelContent {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
 .panelContent {
   /* for positioning the color group absolutely */
   position: relative;
@@ -23,6 +19,10 @@
 
 .subpanel {
   padding-left: 20px;
+}
+
+.panelContent .subpanel:first-child {
+  border-top: thin solid rgba(0, 0, 0, 0.1);
 }
 
 .subpanelHeader {
