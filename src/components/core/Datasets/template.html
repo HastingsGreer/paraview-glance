@@ -11,6 +11,7 @@
   >
     <v-expansion-panel-header
       class="pv-no-select pl-3 pr-3 pt-1 pb-1"
+      :class="$style.panelHeader"
     >
       <v-btn
         icon
@@ -28,6 +29,7 @@
       >
         {{ source.getName() }}
       </div>
+      <v-spacer />
       <v-tooltip
         v-if="proxyManager.getSources().length > 1"
         bottom

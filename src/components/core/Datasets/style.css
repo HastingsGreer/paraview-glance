@@ -1,4 +1,4 @@
-.datasetPanel {
+.datasetPanel:last-child {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -14,15 +14,25 @@
 
 /* vuetify override */
 .panelContent > :global(.v-expansion-panel-content__wrap) {
-  padding: 4px 0;
+  padding: 0;
 }
 
 .subpanel {
   padding-left: 20px;
 }
 
+.subpanel .panelContent {
+  padding: 4px 0;
+}
+
 .panelContent .subpanel:first-child {
   border-top: thin solid rgba(0, 0, 0, 0.1);
+}
+
+/* vuetify override */
+/* This sets flex-grow to 0 for header contents */
+.panelHeader > :not(.v-expansion-panel-header__icon) {
+  flex: unset;
 }
 
 .subpanelHeader {
