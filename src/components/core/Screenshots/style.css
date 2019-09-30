@@ -13,26 +13,16 @@
   align-items: center;
 }
 
-.takeScreenshot {
-  margin-top: 16px;
-}
-
 .filename {
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.listIcon {
+.action {
   /* override vuetify */
-  min-width: 0;
-}
-
-.listButton {
-  /* match v-list-item-title height */
-  height: 24px;
-  width: 24px;
+  min-width: unset;
   /* override vuetify */
-  margin: 0 3px;
+  margin-left: 4px !important;
 }
 
 .hoverTooltip {
