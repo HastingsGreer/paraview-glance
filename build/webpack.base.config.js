@@ -70,6 +70,10 @@ module.exports = {
         ],
       },
       {
+        test: /\.pug$/,
+        loader: "pug-plain-loader",
+      },
+      {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
