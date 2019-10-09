@@ -3,6 +3,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Vuetify from 'vuetify/lib';
 
+import GirderProvider from 'paraview-glance/src/girder';
+
 import vtkURLExtract from 'vtk.js/Sources/Common/Core/URLExtract';
 import vtkProxyManager from 'vtk.js/Sources/Proxy/Core/ProxyManager';
 
@@ -62,6 +64,7 @@ export function createViewer(container, proxyConfig = null) {
     el: container,
     components: { App },
     store,
+    provide: GirderProvider,
     vuetify: new Vuetify(),
     template: '<App />',
   });

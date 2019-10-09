@@ -1,0 +1,13 @@
+<v-card>
+  <div :class="$style.close">
+    <v-btn text icon @click="$emit('close')">
+      <v-icon>mdi-close</v-icon>
+    </v-btn>
+  </div>
+  <v-card-title class="text-center">
+    <svg-icon icon="paraview-glance" :class="$style.glanceIcon" />
+  </v-card-title>
+  <v-card-text>
+    <div> IMMA GIRDER </div>
+  </v-card-text>
+</v-card>
