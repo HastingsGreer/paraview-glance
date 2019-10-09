@@ -13,15 +13,17 @@ export const extensions = Array.from(
 
 export function registerToGlance(Glance) {
   if (Glance) {
-    extensions.filter((e) => e !== 'dcm').forEach((extension) =>
-      Glance.registerReader({
-        extension,
-        name: `${extension.toUpperCase()} Reader`,
-        vtkReader: vtkITKImageReader,
-        binary: true,
-        fileNameMethod: 'setFileName',
-      })
-    );
+    extensions
+      .filter((e) => e !== 'dcm')
+      .forEach((extension) =>
+        Glance.registerReader({
+          extension,
+          name: `${extension.toUpperCase()} Reader`,
+          vtkReader: vtkITKImageReader,
+          binary: true,
+          fileNameMethod: 'setFileName',
+        })
+      );
 
     Glance.registerReader({
       extension: 'dcm',
