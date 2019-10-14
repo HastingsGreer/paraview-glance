@@ -1,0 +1,14 @@
+<v-card>
+  <div :class="$style.close">
+    <v-btn text icon @click="$emit('close')">
+      <v-icon>mdi-close</v-icon>
+    </v-btn>
+  </div>
+
+  <v-card v-if="loggedOut">
+  <GirderAuthentication register :oauth=true :key="girderRest.token" />
+  </v-card>
+  <v-card>
+  <GirderDataBrowser :root-location-disabled="false" />
+  </v-card>
+</v-card>

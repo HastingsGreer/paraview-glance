@@ -63,6 +63,13 @@
         <v-toolbar-items v-show="$vuetify.breakpoint.smAndUp">
           <v-btn
             text
+            v-on:click="girderDialog = true"
+          >
+            <v-icon left>mdi-folder</v-icon>
+            <span v-show="!smallScreen">Girder</span>
+          </v-btn>
+          <v-btn
+            text
             v-on:click="promptUserFiles"
           >
             <v-icon left>mdi-folder</v-icon>
@@ -200,6 +207,15 @@
         max-width="50%"
       >
         <about-box v-on:close="aboutDialog = false" />
+      </component>
+
+      <!-- Girder dialog -->
+      <component
+        :is="dialogType"
+        v-model="girderDialog"
+        max-width="80%"
+      >
+        <girder-box v-on:close="girderDialog = false" />
       </component>
 
       <!-- error dialog-->

@@ -3,6 +3,7 @@ import Mousetrap from 'mousetrap';
 import { VBottomSheet, VDialog } from 'vuetify/lib';
 
 import AboutBox from 'paraview-glance/src/components/core/AboutBox';
+import GirderBox from 'paraview-glance/src/components/core/GirderBox';
 import BrowserIssues from 'paraview-glance/src/components/core/BrowserIssues';
 import ControlsDrawer from 'paraview-glance/src/components/core/ControlsDrawer';
 import DragAndDrop from 'paraview-glance/src/components/widgets/DragAndDrop';
@@ -25,6 +26,7 @@ export default {
   name: 'App',
   components: {
     AboutBox,
+    GirderBox,
     BrowserIssues,
     ControlsDrawer,
     DragAndDrop,
@@ -41,6 +43,7 @@ export default {
   data() {
     return {
       aboutDialog: false,
+      girderDialog: false,
       errorDialog: false,
       controlsDrawer: false,
       screenshotsDrawer: false,
