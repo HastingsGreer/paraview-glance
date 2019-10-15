@@ -1,7 +1,7 @@
 import SvgIcon from 'paraview-glance/src/components/widgets/SvgIcon';
 
 import { Authentication as GirderAuthentication } from '@girder/components/src/components';
-import { FileManager as GirderDataBrowser } from '@girder/components/src/components/Snippet';
+import { FileManager as GirderFileManager} from '@girder/components/src/components/Snippet';
 
 // ----------------------------------------------------------------------------
 
@@ -10,7 +10,7 @@ export default {
   components: {
     SvgIcon,
     GirderAuthentication,
-    GirderDataBrowser,
+    GirderFileManager,
   },
   inject: ['girderRest'],
   data() {
