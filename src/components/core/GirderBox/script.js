@@ -14,7 +14,9 @@ export default {
   },
   inject: ['girderRest'],
   data() {
-    return { 1: 2 };
+    return {
+      selected: [],
+    };
   },
   computed: {
     currentUserLogin() {
@@ -22,6 +24,11 @@ export default {
     },
     loggedOut() {
       return this.girderRest.user === null;
+    },
+  },
+  methods: {
+    load() {
+      console.log(this.selected);
     },
   },
 };

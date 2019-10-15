@@ -6,9 +6,16 @@
   </div>
 
   <v-card v-if="loggedOut">
-  <GirderAuthentication register :oauth=true :key="girderRest.token" />
+    <GirderAuthentication register :oauth=true :key="girderRest.token" />
   </v-card>
   <v-card>
-  <GirderDataBrowser :root-location-disabled="false" />
+    <GirderDataBrowser
+    :root-location-disabled="false"
+    :selectable="true"
+    v-model="selected"
+    />
   </v-card>
+    <v-btn text @click="load()">
+       Open
+    </v-btn>
 </v-card>
