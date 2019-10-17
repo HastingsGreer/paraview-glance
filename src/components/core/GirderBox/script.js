@@ -1,7 +1,7 @@
 import SvgIcon from 'paraview-glance/src/components/widgets/SvgIcon';
 
 import { Authentication as GirderAuthentication } from '@girder/components/src/components';
-import { FileManager as GirderFileManager} from '@girder/components/src/components/Snippet';
+import { FileManager as GirderFileManager } from '@girder/components/src/components/Snippet';
 
 // ----------------------------------------------------------------------------
 
@@ -29,6 +29,14 @@ export default {
   methods: {
     load() {
       console.log(this.selected);
+      const urls = this.selected.map((elem) => {
+        /* eslint-disable-next-line no-underscore-dangle */
+        return `https://data.kitware.com/api/v1/item/${elem._id}/download`;
+      });
+      const names = this.selected.map((elem) => {
+        return elem.name;
+      });
+      this.$store.dispatch('OPEN_REMOTE_FILES', { urls, names });
     },
   },
 };
