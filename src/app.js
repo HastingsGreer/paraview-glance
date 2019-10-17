@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import Vuetify from 'vuetify/lib';
 
 import GirderProvider from 'paraview-glance/src/girder';
+import { vuetifyConfig as girderVuetifyConfig } from '@girder/components/src/utils';
 
 import vtkURLExtract from 'vtk.js/Sources/Common/Core/URLExtract';
 import vtkProxyManager from 'vtk.js/Sources/Proxy/Core/ProxyManager';
@@ -65,7 +66,9 @@ export function createViewer(container, proxyConfig = null) {
     components: { App },
     store,
     provide: GirderProvider,
-    vuetify: new Vuetify(),
+    // if in the future we want to configure vuetify ourselves, see
+    // https://github.com/girder/girder_web_components/blob/master/README.md
+    vuetify: new Vuetify(girderVuetifyConfig),
     template: '<App />',
   });
 
