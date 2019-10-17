@@ -1,10 +1,4 @@
 <v-card>
-  <div :class="$style.close">
-    <v-btn text icon @click="$emit('close')">
-      <v-icon>mdi-close</v-icon>
-    </v-btn>
-  </div>
-
   <v-card v-if="loggedOut">
     <GirderAuthentication register :oauth=true :key="girderRest.token" />
   </v-card>
@@ -15,7 +9,21 @@
     v-model="selected"
     />
   </v-card>
-  <v-btn text @click="load()">
-     Open
-  </v-btn>
+  <v-app-bar>
+    <v-btn class ="mt-4" @click="changeServer=!changeServer">
+       Change Server
+    </v-btn>
+    <v-spacer />
+    <v-btn class="mt-4" @click="load()" :disabled="!selected.length">
+       Open
+    </v-btn>
+    <v-btn class="mt-4" @click="$emit('close')">
+       Cancel
+    </v-btn>
+  </v-app-bar>
+  <div :class="$style.close">
+    <v-btn text icon @click="$emit('close')">
+      <v-icon>mdi-close</v-icon>
+    </v-btn>
+  </div>
 </v-card>

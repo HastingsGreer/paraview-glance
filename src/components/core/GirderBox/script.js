@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       selected: [],
+      changeServer: false,
     };
   },
   computed: {
@@ -37,6 +38,7 @@ export default {
         return elem.name;
       });
       this.$store.dispatch('OPEN_REMOTE_FILES', { urls, names });
+      this.$emit('close');
     },
   },
 };
