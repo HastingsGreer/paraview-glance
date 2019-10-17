@@ -29,10 +29,9 @@ export default {
   },
   methods: {
     load() {
-      console.log(this.selected);
       const urls = this.selected.map((elem) => {
         /* eslint-disable-next-line no-underscore-dangle */
-        return `https://data.kitware.com/api/v1/item/${elem._id}/download`;
+        return `${this.girderRest.apiRoot}/item/${elem._id}/download`;
       });
       const names = this.selected.map((elem) => {
         return elem.name;
