@@ -14,6 +14,7 @@ const apiRoot =
 const girderRest = new RestClient({
   apiRoot,
 });
+girderRest.fetchUser();
 
 // This is passed to our Vue instance; it will be available in all components
 const GirderProvider = {

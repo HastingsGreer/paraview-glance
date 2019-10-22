@@ -1,26 +1,46 @@
 <v-card>
-  <v-card v-if="loggedOut">
-    <GirderAuthentication register :oauth=true :key="girderRest.token" />
-  </v-card>
-  <v-card>
-    <GirderFileManager
-    :root-location-disabled="false"
-    :selectable="true"
-    v-model="selected"
-    />
-  </v-card>
-  <v-app-bar>
-    <!--<v-btn class ="mt-4" @click="changeServer=!changeServer">
-       Change Server
-    </v-btn> -->
-    <v-spacer />
-    <v-btn class="mt-4" @click="load()" :disabled="!selected.length">
-       Open
-    </v-btn>
-    <v-btn class="mt-4" @click="$emit('close')">
-       Cancel
-    </v-btn>
-  </v-app-bar>
+  <v-container>
+    <v-row>
+      <v-col v-if="loggedOut">
+        <GirderAuthentication register :oauth=true :key="girderRest.token" />
+      </v-col>
+      <v-col>
+        <v-toolbar>
+          <v-toolbar-title>Local Data</v-toolbar-title>
+        </v-toolbar>
+        <Datasets />
+        <v-spacer />
+        <v-toolbar>
+          <!--<v-btn class ="mt-4" @click="changeServer=!changeServer">
+             Change Server
+          </v-btn> -->
+          <v-spacer />
+          <v-btn class="mt-4" @click="upload()">
+             Upload
+          </v-btn>
+        </v-toolbar>
+      </v-col>
+      <v-col>
+        <GirderFileManager
+          :root-location-disabled="false"
+          :selectable="true"
+          v-model="selected"
+          :location.sync="location"
+          />
+        <v-toolbar>
+          <v-spacer />
+
+          <v-btn class="mt-4" @click="load()" :disabled="!selected.length">
+             Open
+          </v-btn>
+          <v-btn class="mt-4" @click="$emit('close')">
+             Cancel
+          </v-btn>
+        </v-toolbar>
+      </v-col>
+    </v-row>
+  </v-container>
+  
   <div :class="$style.close">
     <v-btn text icon @click="$emit('close')">
       <v-icon>mdi-close</v-icon>
