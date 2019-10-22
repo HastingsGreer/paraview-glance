@@ -8,13 +8,16 @@
         <v-toolbar>
           <v-toolbar-title>Local Data</v-toolbar-title>
         </v-toolbar>
-        <Datasets />
+        <!--<Datasets />-->
         <v-spacer />
         <v-toolbar>
           <!--<v-btn class ="mt-4" @click="changeServer=!changeServer">
              Change Server
           </v-btn> -->
           <v-spacer />
+          <v-btn class="mt-4" @click="export2pc()">
+             Local Export
+          </v-btn>
           <v-btn class="mt-4" @click="upload()">
              Upload
           </v-btn>

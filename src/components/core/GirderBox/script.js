@@ -5,6 +5,7 @@ import Datasets from 'paraview-glance/src/components/core/Datasets';
 
 import { Authentication as GirderAuthentication } from '@girder/components/src/components';
 import { FileManager as GirderFileManager } from '@girder/components/src/components/Snippet';
+import { Upload as GirderUpload } from '@girder/components/src/utils';
 
 import writeImageArrayBuffer from 'itk/writeImageArrayBuffer';
 import Matrix from 'itk/Matrix';
@@ -60,7 +61,8 @@ function convertVtkToItkImage(vtkImage) {
     data: vtkImage
       .getPointData()
       .getScalars()
-      .get().values,
+      .get()
+      .values.slice(0),
   };
   return itkImage;
 }
@@ -127,18 +129,22 @@ export default {
       const dataset = this.proxyManager.getActiveSource().get().dataset;
 
       const image = convertVtkToItkImage(dataset);
+      console.log(this.girderRest);
 
       writeImageArrayBuffer(null, false, image, 'out.mha').then(
-        function recieve({ buffer }) {
+        ({ buffer }) => {
+          debugger;
+          console.log(this.girderRest);
           const blob = new Blob([buffer]);
-          const url = URL.createObjectURL(blob);
-          const anchor = document.createElement('a');
-          anchor.setAttribute('href', url);
-          anchor.setAttribute('download', 'out.mha');
-
-          document.body.appendChild(anchor);
-          anchor.click();
-          document.body.removeChild(anchor);
+          const file = new File(
+            [blob],
+            this.proxyManager.getActiveSource().get().name
+          );
+          const upload = new GirderUpload(file, {
+            $rest: this.girderRest,
+            parent: this.location,
+          });
+          upload.start();
         }
       );
     },
