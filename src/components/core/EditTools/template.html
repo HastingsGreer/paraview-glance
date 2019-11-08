@@ -26,4 +26,13 @@
       @enable="setEnabledTool('crop', $event)"
     />
   </v-expansion-panel-content>
+  <v-expansion-panel-content>
+    <template v-slot:header>
+      <span class="body-2">Median</span>
+    </template>
+    <median-tool
+      :enabled="enabledTool === 'median'"
+      @enable="setEnabledTool('median', $event)"
+    />
+  </v-expansion-panel-content>
 </v-expansion-panel>

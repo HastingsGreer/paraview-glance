@@ -1,0 +1,22 @@
+<div :class="$style.top">
+  <v-container :class="$style.container">
+    <v-layout wrap align-center>
+      <v-flex xs12>
+        <source-select
+          label="Target volume"
+          :filterFunc="filterImages"
+          bindToActiveSource
+          hideIfOneDataset
+          @input="setTargetVolume"
+        />
+      </v-flex>
+    </v-layout>
+  </v-container>
+  <v-container :class="$style.container">
+      <v-btn @click="median" flat>
+        <v-icon left>replay</v-icon>
+        Median
+      </v-btn>
+    </v-layout>
+  </v-container>
+</div>
