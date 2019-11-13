@@ -131,7 +131,7 @@ export default {
       const image = convertVtkToItkImage(dataset);
       console.log(this.girderRest);
 
-      writeImageArrayBuffer(null, false, image, 'out.mha').then(
+      writeImageArrayBuffer(null, false, image, this.proxyManager.getActiveSource().get().name).then(
         ({ buffer }) => {
           debugger;
           console.log(this.girderRest);
