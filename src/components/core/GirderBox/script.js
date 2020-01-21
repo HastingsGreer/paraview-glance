@@ -131,22 +131,25 @@ export default {
       const image = convertVtkToItkImage(dataset);
       console.log(this.girderRest);
 
-      writeImageArrayBuffer(null, false, image, this.proxyManager.getActiveSource().get().name).then(
-        ({ buffer }) => {
-          debugger;
-          console.log(this.girderRest);
-          const blob = new Blob([buffer]);
-          const file = new File(
-            [blob],
-            this.proxyManager.getActiveSource().get().name
-          );
-          const upload = new GirderUpload(file, {
-            $rest: this.girderRest,
-            parent: this.location,
-          });
-          upload.start();
-        }
-      );
+      writeImageArrayBuffer(
+        null,
+        false,
+        image,
+        this.proxyManager.getActiveSource().get().name
+      ).then(({ buffer }) => {
+        debugger;
+        console.log(this.girderRest);
+        const blob = new Blob([buffer]);
+        const file = new File(
+          [blob],
+          this.proxyManager.getActiveSource().get().name
+        );
+        const upload = new GirderUpload(file, {
+          $rest: this.girderRest,
+          parent: this.location,
+        });
+        upload.start();
+      });
     },
   },
 };

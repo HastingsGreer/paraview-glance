@@ -2,8 +2,8 @@ import vtkColorMaps from 'vtk.js/Sources/Rendering/Core/ColorTransferFunction/Co
 import Presets from 'paraview-glance/src/config/Presets.json';
 
 const DEFAULT_PRESET = {
-  Name: 'Default (Cool to Warm)',
   ...vtkColorMaps.getPresetByName('Cool to Warm'),
+  Name: 'Default (Cool to Warm)',
 };
 
 // sorts case insensitively
