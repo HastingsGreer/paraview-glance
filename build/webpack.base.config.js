@@ -78,6 +78,7 @@ module.exports = {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
+	options: {fix: true},
       },
       /* for vtk.js styles */
       {
