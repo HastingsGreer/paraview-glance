@@ -34,13 +34,18 @@ export default {
     loggedOut() {
       return this.girderRest.user === null;
     },
-    ...mapState({
-      proxyManager: 'proxyManager',
+    ...mapState('widgets', {
+      dataMeasurements: 'measurements',
     }),
   },
   mounted() {
+    // TODO these can be moved to store when we add girder
+    // state to store
     this.$root.$on('girder_upload_proxy', (proxyId) => {
       this.upload(proxyId);
+    });
+    this.$root.$on('girder_upload_measurements', (proxyId) => {
+      this.uploadMeasurements(proxyId);
     });
   },
   methods: {
@@ -51,13 +56,16 @@ export default {
           url: `${this.girderRest.apiRoot}/item/${elem._id}/download`,
           name: elem.name,
           proxyKeys: {
-            girderProvenence: this.location,
-            onLoad: (source) => {
-              console.log(source, elem);
-              if (elem.meta.glanceDataType === 'vtkLabelMap') {
-                this.$root.$emit('add_labelmap', source.getProxyId());
-              }
+            girderProvenance: {
+              ...this.location,
+              apiRoot: this.girderRest.apiRoot,
             },
+            girderItem: {
+              /* eslint-disable-next-line no-underscore-dangle */
+              itemId: elem._id,
+              itemName: elem.name,
+            },
+            meta: elem.meta,
           },
         };
       });
@@ -65,7 +73,7 @@ export default {
       this.$store.dispatch('files/openRemoteFiles', rfiles);
     },
     export2pc(proxyId) {
-      const dataset = this.proxyManager.getProxyById(proxyId).get().dataset;
+      const dataset = this.$proxyManager.getProxyById(proxyId).get().dataset;
 
       const image = ITKHelper.convertVtkToItkImage(dataset);
       // If we don't copy here, the renderer's copy of the ArrayBuffer
@@ -86,7 +94,17 @@ export default {
       );
     },
     upload(proxyId) {
-      const dataset = this.proxyManager.getProxyById(proxyId).get().dataset;
+      const dataset = this.$proxyManager.getProxyById(proxyId).get().dataset;
+
+      const metadata = {
+        glanceDataType: dataset.getClassName(),
+      };
+
+      if (dataset.getClassName() === 'vtkLabelMap') {
+        Object.assign(metadata, {
+          colorMap: dataset.getColorMap(),
+        });
+      }
 
       const image = ITKHelper.convertVtkToItkImage(dataset);
       // If we don't copy here, the renderer's copy of the ArrayBuffer
@@ -96,33 +114,47 @@ export default {
         null,
         false,
         image,
-        this.proxyManager.getProxyById(proxyId).get().name
+        this.$proxyManager.getProxyById(proxyId).get().name
       ).then((valueReturned) => {
         const buffer = valueReturned.arrayBuffer;
         const blob = new Blob([buffer]);
         const file = new File(
           [blob],
-          this.proxyManager.getProxyById(proxyId).get().name
+          this.$proxyManager.getProxyById(proxyId).get().name
         );
         const upload = new GirderUpload(file, {
           $rest: this.girderRest,
           parent:
-            this.proxyManager
+            this.$proxyManager
               .getProxyById(proxyId)
-              .getKey('girderProvenence') || this.location,
+              .getKey('girderProvenance') || this.location,
         });
         upload.start().then((response) => {
           const { itemId } = response;
           this.girderRest.put(
             `${this.girderRest.apiRoot}/item/${itemId}`,
-            `metadata=${JSON.stringify({
-              glanceDataType: dataset.getClassName(),
-            })}`
+            `metadata=${JSON.stringify(metadata)}`
           );
 
           this.$refs.girderFileManager.refresh();
         });
       });
+    },
+    uploadMeasurements(proxyId) {
+      const measurements = this.dataMeasurements[proxyId];
+      if (measurements) {
+        const proxyName = this.$proxyManager.getProxyById(proxyId).getName();
+        const name = `${proxyName}.measurements.json`;
+        const file = new File([JSON.stringify(measurements)], name);
+        const upload = new GirderUpload(file, {
+          $rest: this.girderRest,
+          parent:
+            this.$proxyManager
+              .getProxyById(proxyId)
+              .getKey('girderProvenance') || this.location,
+        });
+        upload.start().then(() => this.$refs.girderFileManager.refresh());
+      }
     },
   },
 };
